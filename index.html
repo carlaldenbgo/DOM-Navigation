@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="main.css" rel="stylesheet">
+
+  <body>
+    <section class="board-section">
+      <div class="board-container">
+        <div class="board-space">
+          <div class="board">
+            <div class="board-title">
+              <h2>Titan</h2>
+            </div>
+            <div class="board-content" id="titanboard">
+              <ul>
+                <li>Striker</li>
+                <li>Sunbreaker</li>
+                <li>Sentinel</li>
+              </ul>
+              <div class="board-actions">
+                <button class="collapsethis">Collapse This Board</button>
+                <button class="collapsebefore">Collapse all Boards Before</button>
+                <button class="collapseafter">Collapse all Boards After</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="board-space">
+          <div class="board">
+            <div class="board-title">
+              <h2>Hunter</h2>
+            </div>
+            <div class="board-content" id="hunterboard">
+              <ul>
+                <li>Arcstrider</li>
+                <li>Gunslinger</li>
+                <li>Nightstalker</li>
+              </ul>
+              <div class="board-actions">
+                <button class="collapsethis">Collapse This Board</button>
+                <button class="collapsebefore">Collapse all Boards Before</button>
+                <button class="collapseafter">Collapse all Boards After</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="board-space">
+          <div class="board">
+            <div class="board-title">
+              <h2>Warlock</h2>
+            </div>
+            <div class="board-content" id="warlockboard">
+              <ul>
+                <li>Stormcaller</li>
+                <li>Dawnblade</li>
+                <li>Voidwalker</li>
+              </ul>
+              <div class="board-actions">
+                <button class="collapsethis">Collapse This Board</button>
+                <button class="collapsebefore">Collapse all Boards Before</button>
+                <button class="collapseafter">Collapse all Boards After</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="other-actions-section">
+      <div class="other-actions-container">
+        <button onclick="collapseAll()">Collapse All Boards</button>
+        <button onclick="expandAll()">Expand All Boards</button>
+        <input id="board-name-input" type="text"></input>
+        <button id="board-name-expand" onclick="expandInput()">Expand Input</button>
+      </div>
+    </section>
+
+    <script>
+      var i;
+      // sources:
+      // https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
+      // https://stackoverflow.com/questions/4644673/hide-all-elements-with-class-using-plain-javascript
+      // https://stackoverflow.com/questions/66018260/javascript-hide-show-multiple-buttons-calling-1-function
+
+      let board = document.querySelectorAll(".board");
+      let boardcontent = document.querySelectorAll(".board-content");
+      let collapsethis = document.querySelectorAll(".collapsethis");
+      let expandthis = document.querySelectorAll(".board-title");
+      let collapsebefore = document.querySelectorAll(".collapsebefore");
+      let collapseafter = document.querySelectorAll(".collapseafter");
+
+      /*--------------------COLLAPSE ALL BOARDS--------------------*/
+      function collapseAll()
+      {
+        for (i = 0; i < board.length; i++)
+        {
+          board[i].firstElementChild.nextElementSibling.style.display = "none";
+        }
+      }
+      /*---------------------------END-----------------------------*/
+
+      /*--------------------EXPAND ALL BOARDS----------------------*/
+      function expandAll()
+      {
+        for (i = 0; i < board.length; i++)
+        {
+          board[i].firstElementChild.nextElementSibling.style.display = "block";
+        }
+      }
+      /*---------------------------END-----------------------------*/
+
+      /*-------------------COLLAPSE THIS BOARD---------------------*/
+      for (i = 0; i < board.length; i++)
+      {
+        collapsethis[i].addEventListener("click", function()
+        {
+          this.parentElement.parentElement.style.display="none";
+        });
+      }
+      /*---------------------------END-----------------------------*/
+
+      /*--------------------EXPAND THIS BOARD----------------------*/
+      for (i = 0; i < board.length; i++)
+      {
+        expandthis[i].addEventListener("click", function()
+        {
+          this.nextElementSibling.style.display="block";
+        });
+      }
+      /*---------------------------END-----------------------------*/
+
+      /*-------------------COLLAPSE ALL BEFORE---------------------*/
+      for (i = 0; i < board.length; i++)
+      {
+        collapsebefore[i].addEventListener("click", function()
+        {
+          let boardcontent = document.querySelectorAll(".board-content");
+          for (i = 0; i < board.length; i++)
+          {
+            if (boardcontent[i] == this.parentElement.parentElement)
+            {
+              break;
+            }
+            else
+            {
+              boardcontent[i].style.display = "none";
+            }
+          }
+        });
+      }
+      /*---------------------------END-----------------------------*/
+
+      /*-------------------COLLAPSE ALL AFTER----------------------*/
+      for (i = 0; i < board.length; i++)
+      {
+        collapseafter[i].addEventListener("click", function()
+        {
+          let boardcontent = document.querySelectorAll(".board-content");
+          for (i = board.length-1; i > 0; i--)
+          {
+            if (boardcontent[i] == this.parentElement.parentElement)
+            {
+              break;
+            }
+            else
+            {
+              boardcontent[i].style.display = "none";
+            }
+          }
+        });
+      }
+      /*---------------------------END-----------------------------*/
+
+      /*---------------------EXPAND ON INPUT-----------------------*/
+      function expandInput()
+      {
+
+      }
+
+      /*---------------------------END-----------------------------*/
+
+    </script>
+  </body>
+<html>
